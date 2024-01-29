@@ -11,12 +11,13 @@ public:
         }
 
         for(int i=0; i<nums.size(); i++) {
+            // Checking unmarked (unpicked)
             if(!map[i]) {
                 comp.push_back(nums[i]);
-                map[i] = 1;
+                map[i] = 1;     // Mark as picked
                 Permutations(nums, ans, comp, map);
                 comp.pop_back();
-                map[i] = 0;
+                map[i] = 0;     // Mark as unpicked
             }
         }
     }
@@ -25,7 +26,7 @@ public:
         vector<vector<int>> ans;
         vector<int> comp;
         int map[nums.size()];
-        for(int i=0; i<nums.size(); i++) map[i] = 0;
+        for(int i=0; i<nums.size(); i++) map[i] = 0;    // Initialising map with 0
 
         Permutations(nums, ans, comp, map);
 
