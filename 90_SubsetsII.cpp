@@ -4,7 +4,7 @@ using namespace std;
 class Solution {
 public:
     void subSet(int i, vector<int> &nums, vector<int> &subS, vector<vector<int>> &ans) {
-        ans.push_back(subS);
+        ans.push_back(subS);    // We need to push at each stage be it empty or size 1 or 2 ...
 
         for(int j=i; j<nums.size(); j++) {
             if(j>i && nums[j] == nums[j-1]) continue;
