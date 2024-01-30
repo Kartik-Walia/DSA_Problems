@@ -9,6 +9,7 @@ public:
             mid = L + ((R-L)/2);
             
             // Search on the side where neighbour value is greater than mid value 
+            // NOTE: nums[i] != nums[i+1] && Boundaries can be the solution
             if(mid>0 && nums[mid-1]>nums[mid]) R = mid-1;   // Left neighbour greater
             else if(mid<nums.size()-1 && nums[mid+1]>nums[mid]) L = mid+1;  // Right neighbour greater
             else break;
