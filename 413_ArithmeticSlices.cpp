@@ -10,7 +10,7 @@ public:
             int diff = nums[i+1] - nums[i];
             for(int j=i+2; j<nums.size(); j++) {    // i+2 bcoz we need minimum 3 elements to form AP (i, i+1 & i+2)
                 if(nums[j]-nums[j-1] == diff) count++;      // [1, 2, 3] and [1, 2, 3, 4] both are considered 2 different AP's
-                else break;
+                else break;     // Bcoz now element is breaking our contiguous sequence
             }
         }
         return count;
