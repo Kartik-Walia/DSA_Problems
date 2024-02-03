@@ -38,10 +38,9 @@ using namespace std;
         
 //         for(int i=2; i<=n; i++) {
 //             dp[i] = dp[i-1] + dp[i-2];
-//             if(i==n) return dp[i];
 //         }
 
-//         return 0;
+//         return dp[n];
 //     }
 // };
 
@@ -50,13 +49,13 @@ using namespace std;
 class Solution {
 public:
     int climbStairs(int n) {
-        int prev2=0, prev=1;
+        int prev2=1, prev=1;
         for(int i=2; i<=n; i++) {
             int curi = prev + prev2;
             prev2 = prev;
             prev = curi;
         }
-        // At end of loop, prev and prev2 store the counts for the two previous steps n-1 and n-2
-        return prev + prev2;    // Their sum gives total number of ways to reach the top
+        
+        return prev;
     }
 };
