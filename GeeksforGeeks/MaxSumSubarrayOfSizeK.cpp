@@ -19,6 +19,7 @@ public:
             else if (j-i+1 == K) {
                 sum += Arr[j];
                 maxSum = max(maxSum, sum);
+                
                 // Maintain window size 
                 sum -= Arr[i];
                 i++; j++;

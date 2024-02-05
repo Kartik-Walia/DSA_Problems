@@ -33,21 +33,29 @@ using namespace std;
 
 // ===================================================== Approach-II (Sliding Window) =====================================================
 vector<long long> printFirstNegativeInteger(long long int A[], long long int N, long long int K) {
+    
+    long long int i=0, j=0;
     vector<long long> ans(N-K+1,0);
-    queue<int> q;   // To store indices of negative nos.
+    queue<int> q;   // To store indices of negative numbers
     
-    // Processing 1st window 
-    for(int i=0; i<K; i++) {
-        if(A[i] < 0) q.push(i);
-    }
-    if(!q.empty()) ans[0] = A[q.front()];
-    
-    // Sliding window (i-K+1 to i)
-    for(int i=K; i<N; i++) {
-        if(A[i] < 0) q.push(i);
-        if(!q.empty() && q.front() < i-K+1) q.pop();
-        if(!q.empty()) ans[i-K+1] = A[q.front()];
+    while(j < N) {
+        // Expand window till we hit window size 
+        if(j-i+1 < K) {
+            if(A[j] < 0) q.push(j);
+            j++;
+        }
+        
+        // Sliding window (maintain window size)
+        else if(j-i+1 == K) {
+            if(A[j] < 0) q.push(j);
+            if(!q.empty() && q.front() < i) q.pop();
+            if(!q.empty()) ans[i] = A[q.front()];
+            
+            // Maintain window size 
+            i++; j++;
+        }
     }
     
     return ans;
 }
+
