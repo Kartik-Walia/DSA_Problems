@@ -35,7 +35,7 @@ using namespace std;
 vector<long long> printFirstNegativeInteger(long long int A[], long long int N, long long int K) {
     
     long long int i=0, j=0;
-    vector<long long> ans(N-K+1,0);
+    vector<long long> ans(N-K+1,0);     // For each window of size K there would be 1 output 
     queue<int> q;   // To store indices of negative numbers
     
     while(j < N) {
@@ -47,11 +47,12 @@ vector<long long> printFirstNegativeInteger(long long int A[], long long int N, 
         
         // Sliding window (maintain window size)
         else if(j-i+1 == K) {
+            // Get answer & maintain window size 
             if(A[j] < 0) q.push(j);
             if(!q.empty() && q.front() < i) q.pop();
             if(!q.empty()) ans[i] = A[q.front()];
             
-            // Maintain window size 
+            // Slide the window
             i++; j++;
         }
     }

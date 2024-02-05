@@ -17,11 +17,12 @@ public:
             
             // Sliding window (maintain window size)
             else if (j-i+1 == K) {
+                // Get answer & maintain window size
                 sum += Arr[j];
                 maxSum = max(maxSum, sum);
-                
-                // Maintain window size 
                 sum -= Arr[i];
+
+                // Slide the window
                 i++; j++;
             }
         }
