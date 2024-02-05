@@ -5,23 +5,26 @@ using namespace std;
 class Solution{   
 public:
     long maximumSumSubarray(int K, vector<int> &Arr , int N){
-        // Edge case
-        if(K == 1) {
-            sort(Arr.begin(), Arr.end());
-            long s = Arr[N-1];
-            return s;
+        int i = 0, j = 0;
+        long sum = 0, maxSum = INT_MIN;
+        
+        while(j < N) {
+            // Expand till we hit window size 
+            if(j-i+1 < K) {
+                sum += Arr[j];
+                j++;
+            }
+            
+            // Sliding window (maintain window size)
+            else if (j-i+1 == K) {
+                sum += Arr[j];
+                maxSum = max(maxSum, sum);
+                // Maintain window size 
+                sum -= Arr[i];
+                i++; j++;
+            }
         }
         
-        // Processing 1st Window
-        long sum=0;
-        for(int i=0; i<K; i++) sum += Arr[i];
-        long maxSum = sum;
-
-        // Sliding window
-        for(int j=K; j<N; j++) {
-            sum = sum -Arr[j-K] + Arr[j];
-            maxSum = max(sum, maxSum);
-        }
         return maxSum;
     }
 };
