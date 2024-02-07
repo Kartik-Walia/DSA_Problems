@@ -9,20 +9,20 @@ public:
         long sum = 0, maxSum = INT_MIN;
         
         while(j < N) {
-            // Expand till we hit window size 
-            if(j-i+1 < K) {
-                sum += Arr[j];
-                j++;
-            }
+            // Perform calculations
+            sum += Arr[j];
             
-            // Sliding window (maintain window size)
+            // Expand untill we hit window size 
+            if(j-i+1 < K) j++;
+            
             else if (j-i+1 == K) {
-                // Get answer & maintain window size
-                sum += Arr[j];
+                // Get answer from calculations
                 maxSum = max(maxSum, sum);
+                
+                // Maintain window size (remove calculations of i)
                 sum -= Arr[i];
-
-                // Slide the window
+                
+                // Slide window
                 i++; j++;
             }
         }

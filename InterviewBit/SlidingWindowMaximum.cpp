@@ -1,9 +1,9 @@
 #include<iostream>
+#include<deque>
+#include<algorithm>
 using namespace std;
 
 
-#include<deque>
-#include<algorithm>
 vector<int> slidingMaximum(const vector<int> &A, int B) {
     
     int i=0, j=0;
@@ -22,21 +22,19 @@ vector<int> slidingMaximum(const vector<int> &A, int B) {
     }
     
     while(j < A.size()) {
+        // Perform calculations
+        while (!dq.empty() && dq.back() < A[j]) dq.pop_back();
+        dq.push_back(A[j]);
+
+        // Expand untill we hit window size 
+        if(j-i+1 < B) j++;
         
-        // Expand window till we hit window size 
-        if(j-i+1 < B) {
-            while(!dq.empty() && dq.back() < A[j]) dq.pop_back();
-            dq.push_back(A[j]);
-            j++;
-        }
-        
-        // Sliding window (maintain window size)
         else if(j-i+1 == B) {
-            // Get answer & maintain window size 
-            while(!dq.empty() && dq.back() < A[j]) dq.pop_back();
-            dq.push_back(A[j]);
+            // Get answer from calculations
             ans.push_back(dq.front());
-            if(dq.front() == A[i]) dq.pop_front();  // Maintain window size
+
+            // Maintain window size (remove calculations of i)
+            if(A[i] == dq.front()) dq.pop_front();
             
             // Slide the window 
             i++; j++;

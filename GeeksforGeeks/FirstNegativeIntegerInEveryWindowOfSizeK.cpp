@@ -35,28 +35,25 @@ using namespace std;
 vector<long long> printFirstNegativeInteger(long long int A[], long long int N, long long int K) {
     
     long long int i=0, j=0;
-    vector<long long> ans(N-K+1,0);     // For each window of size K there would be 1 output 
+    vector<long long> ans(N-K+1,0);
     queue<int> q;   // To store indices of negative numbers
     
     while(j < N) {
-        // Expand window till we hit window size 
-        if(j-i+1 < K) {
-            if(A[j] < 0) q.push(j);
-            j++;
-        }
+        // Perform calculations
+        if(A[j] < 0) q.push(j);
         
-        // Sliding window (maintain window size)
+        // Expand untill we hit window size 
+        if(j-i+1 < K) j++;
+        
         else if(j-i+1 == K) {
-            // Get answer & maintain window size 
-            if(A[j] < 0) q.push(j);
+            // Get answer from calculations & Maintain window size (remove calculations of i)
             if(!q.empty() && q.front() < i) q.pop();
             if(!q.empty()) ans[i] = A[q.front()];
             
-            // Slide the window
+            // Slide window
             i++; j++;
         }
     }
     
     return ans;
 }
-
