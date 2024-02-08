@@ -1,7 +1,8 @@
 #include<iostream>
 using namespace std;
 
-// ============================================== Approach - I ==============================================
+
+// ============================================== Approach-I (Brute Force) ==============================================
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
@@ -21,11 +22,11 @@ public:
 };
 
 // TC : O(k) + O(n-k) + O(k) = O(n+k)
-// SC : O(k)
+// SC : O(k)    (using temp)
 
 
 
-// ============================================== Approach - II ==============================================
+// ============================================== Approach-II (Optimal Approach) ==============================================
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
