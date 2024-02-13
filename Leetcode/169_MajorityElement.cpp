@@ -24,7 +24,7 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         map<int, int> cnt;    // element, count
-        for(int i:nums) cnt[i]++;   // NlogN    [if use unordered map, then this logN will go of only in avg and best case, if worst case unordered map takes O(N) time within itself]
+        for(int i:nums) cnt[i]++;   // NlogN    [if use unordered map, then this logN will go off only in avg and best case, if worst case unordered map takes O(N) time within itself]
         for(auto it:cnt) if(it.second > nums.size()/2) return it.first;     // O(N)
         return -1;
     }
@@ -33,7 +33,7 @@ public:
 // SC : O(N)    [Array contains all unique elements]
 
 
-// ========================================= Approach-II (Optimal Approach - BMMV Algorithm) =========================================
+// ========================================= Approach-III (Optimal Approach - BMMV Algorithm) =========================================
 // BMMV - Boyer-Moore Majority Voting Algorithm
 class Solution {
 public:
