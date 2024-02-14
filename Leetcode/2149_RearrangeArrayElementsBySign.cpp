@@ -20,7 +20,7 @@ public:
         return nums;
     }
 };
-// TC : O(N) + O(N)
+// TC : O(N) + O(N/2)
 // SC : O(N/2) + O(N/2)     [p & n]
 
 
