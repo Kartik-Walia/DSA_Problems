@@ -36,7 +36,7 @@ public:
         long long total=0;
         vector<long long> preSum;
         for(int i:nums) {
-            preSum.push_back(total);
+            preSum.push_back(total);    // Calculating sum of all previous elements before element at index i and storing it in index i of preSum
             total += i;
         }
         for(int i=n-1; i>=2; i--) {
