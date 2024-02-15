@@ -58,6 +58,30 @@ bool searchLL(ListNode* head, int key) {
     return false;
 }
 
+ListNode* deleteHead(ListNode* head) {
+    // Edge case (LL has 0 element)
+    if(head == NULL) return head;
+
+    ListNode* temp = head;
+    head = head->next;
+    delete temp;     // OR free(temp)
+
+    return head;
+}
+
+ListNode* deleteTail(ListNode* head) {
+    // Edge case (LL has 0 or 1 element)
+    if(head == NULL || head->next == NULL) return NULL;
+
+    // Reach 2nd last element
+    ListNode* temp = head;
+    while(temp->next->next != NULL) temp = temp->next;
+    delete temp->next;
+    temp->next = nullptr;
+
+    return head;
+}
+
 int main() {
     vector<int> arr;
     arr.push_back(1);
@@ -68,7 +92,8 @@ int main() {
     arr.push_back(7);
 
     ListNode* head = convertArrayToLL(arr);
-    cout << searchLL(head, 7);
+    head = deleteTail(head);
+    traverseLL(head);
 
     return 0;
 }
