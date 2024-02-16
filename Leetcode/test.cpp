@@ -82,6 +82,132 @@ ListNode* deleteTail(ListNode* head) {
     return head;
 }
 
+ListNode* deleteKthNode(ListNode* head, int k) {
+    // Edge case (LL is empty)
+    if(head == NULL) return head;
+
+    // Delete 1st Node 
+    if(k == 1) {
+        ListNode* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+
+    // Delete middle Node (itself includes Tail deletion)
+    int cnt = 0;
+    ListNode* temp = head;
+    ListNode* prev = NULL;
+    while(temp != NULL) {
+        cnt++;
+        if(cnt == k) {
+            prev->next = prev->next->next;
+            free(temp);
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    return head;
+}
+
+ListNode* deleteValue(ListNode* head, int value) {
+    // Edge case (LL is empty)
+    if(head == NULL) return head;
+
+    // Delete 1st Node 
+    if(head->val == value) {
+        ListNode* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+
+    // Delete middle Node (itself includes Tail deletion)
+    ListNode* temp = head;
+    ListNode* prev = NULL;
+    while(temp != NULL) {
+        if(temp->val == value) {
+            prev->next = prev->next->next;
+            delete temp;
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    return head;
+}
+
+ListNode* insertHead(ListNode* head, int value) {
+    // Edge case (LL is empty)
+    if(head == NULL) return new ListNode(value);
+
+    ListNode* newNode = new ListNode(value, head);
+    return newNode;
+}   // TC : O(1)
+
+ListNode* insertTail(ListNode* head, int value) {
+    // Edge case (LL is empty)
+    if(head == NULL) return new ListNode(value);
+
+    ListNode* temp = head;
+    while(temp->next != NULL) temp = temp->next;
+    ListNode* newNode = new ListNode(value);
+    temp->next = newNode;
+    return head;
+}
+
+ListNode* insertKthNode(ListNode* head, int k, int value) {
+    // Edge case (LL is empty)
+    if(head == NULL) {
+        if(k == 1) return new ListNode(value);
+        else return head;
+    }
+
+    // Insert 1st Node 
+    if(k == 1) {
+        ListNode* newNode = new ListNode(value, head);
+        return newNode;
+    }
+
+    // Insert middle Node (itself includes Tail insertion)
+    int cnt = 0;
+    ListNode* temp = head;
+    while(temp != NULL) {
+        cnt++;
+        if(cnt == k-1) {
+            ListNode* newNode = new ListNode(value, temp->next);
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+}   // TC : O(N) in worst case
+
+ListNode* insertBeforeValue(ListNode* head, int value, int eleVal) {
+    // Edge case (LL is empty)
+    if(head == NULL) return head;
+
+    // Insert 1st Node 
+    if(head->val == value) {
+        ListNode* newNode = new ListNode(eleVal, head);
+        return newNode;
+    }
+
+    // Insert middle Node (itself includes Tail insertion)
+    ListNode* temp = head;  // To access node previous to node with given value
+    while(temp->next != NULL) {    // Don't need to access last node
+        if(temp->next->val == value) {
+            ListNode* newNode = new ListNode(eleVal, temp->next);
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+}
+
 int main() {
     vector<int> arr;
     arr.push_back(1);
@@ -92,7 +218,7 @@ int main() {
     arr.push_back(7);
 
     ListNode* head = convertArrayToLL(arr);
-    head = deleteTail(head);
+    head = insertBeforeValue(head, 73, 4800);
     traverseLL(head);
 
     return 0;
