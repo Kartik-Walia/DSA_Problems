@@ -13,36 +13,35 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* res = new ListNode(-1);   // Dumy node 
-        ListNode* head = res;   // Bcoz res is gonna move ahead
+        ListNode* t1 = l1;
+        ListNode* t2 = l2;
+        ListNode* dummyNode = new ListNode(-1);
+        ListNode* curr = dummyNode;    // curr is for LL traversal
 
         int carry = 0;
+        while(t1 != NULL || t2 != NULL) {    // Stop when both t1 and t2 reach NULL
+            int sum = carry;
+            if(t1) sum += t1->val;
+            if(t2) sum += t2->val;
+            ListNode* newNode = new ListNode(sum%10);
+            carry = sum/10;
 
-        while(l1 != NULL && l2 != NULL) {
-            int value = l1->val + l2->val;
-            int finalValue = (value + carry) % 10;
-            carry = value + carry > 9 ? 1 : 0;
-            res = (res->next = new ListNode(finalValue));   // Resolution of = operator is Right to Left
-            l1 = l1->next;
-            l2 = l2->next;
+            curr->next = newNode;
+            curr = curr->next;
+            
+            if(t1) t1 = t1->next;
+            if(t2) t2 = t2->next;
         }
 
-        while(l1 != NULL) {
-            int finalValue = (l1->val + carry) % 10;
-            carry = l1->val + carry > 9 ? 1 : 0;
-            res = (res->next = new ListNode(finalValue));
-            l1 = l1->next;
+        // Check if there's a leftover carry 
+        if(carry) {
+            ListNode* newNode = new ListNode(carry);
+            curr->next = newNode;
         }
 
-        while(l2 != NULL) {
-            int finalValue = (l2->val + carry) % 10;
-            carry = l2->val + carry > 9 ? 1 : 0;
-            res = (res->next = new ListNode(finalValue));
-            l2 = l2->next;
-        }
-
-        if(carry == 1) res->next = new ListNode(carry);
-
-        return head->next;    // We created dummy node (so ignore 1st node)
+        return dummyNode->next;     // Return head
     }
 };
+
+// TC : O(max(N1, N2))      [where N1 is length of LL l1 & N2 is length of LL l2]
+// SC : O(max(N1, N2))      [where N1 is length of LL l1 & N2 is length of LL l2]   [Used for storing the result] [Not using anything to solve the question]
