@@ -44,7 +44,7 @@ public:
 class Solution {
 public:
     int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
-        priority_queue<int, vector<int>, greater<int>> pq;    // Min Heap (To store jumps made using Ladders)
+        priority_queue<int, vector<int>, greater<int>> pq;    // Min Heap
         int i;
         for(i=0; i<heights.size()-1; i++) {
             int curr = heights[i], next = heights[i+1];
@@ -55,7 +55,7 @@ public:
                 pq.push(jump);
             } else if(pq.size() != 0) {
                 int minJump = pq.top();
-                if(minJump < jump) {
+                if(minJump < jump && minJump <= bricks) {
                     pq.pop();
                     bricks -= minJump;
                     pq.push(jump);
@@ -67,8 +67,6 @@ public:
                 if(jump <= bricks) bricks -= jump;
                 else return i;
             }
-
-            if(bricks < 0) return i;
         }
 
         return i;
