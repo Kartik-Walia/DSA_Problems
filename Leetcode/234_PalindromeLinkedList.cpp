@@ -22,13 +22,12 @@ public:
         }
 
         // Check palindrome 
-        ListNode* curr = head;
-        while(curr != NULL) {
-            if(curr->val != st.top()) return false;
+        temp = head;
+        while(temp != NULL) {
+            if(temp->val != st.top()) return false;
             st.pop();
-            curr = curr->next;
+            temp = temp->next;
         }
-
         return true;
     }
 };
