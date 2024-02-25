@@ -6,9 +6,12 @@ using namespace std;
 class Solution {
 public:
     int rangeBitwiseAnd(int left, int right) {
+        // Edge case
         if(left == right) return left;
+
         int x = left;
         for(int i=left+1; i<=right; i++) x = x&i;
+
         return x;
     }
 };
@@ -20,24 +23,7 @@ public:
 class Solution {
 public:
     int rangeBitwiseAnd(int left, int right) {
-        int shiftCounter = 0;
-        while (left != right) {
-            left >>= 1;
-            right >>= 1;
-            shiftCounter++;
-        }
-        return left << shiftCounter;
-    }
-};
-// TC : O(log(max(left,right)))
-// SC : O(1)
-
-
-// ================================================================== Approach-III (Optimal) ==================================================================
-class Solution {
-public:
-    int rangeBitwiseAnd(int left, int right) {
-        int ans = 0;
+        int ans = 0;    // 31 zero's
 
         // Processing all 31 bits
         for(int i=0; i<31; i++) {
@@ -66,4 +52,25 @@ public:
     }
 };
 // TC : O(1)
+// SC : O(1)
+
+
+// ================================================================== Approach-III (Optimal) ==================================================================
+// KEY POINTS TO TAKEAWAY:
+// 1. All columns to the right of the flipped bit are also flipped 
+// 2. In any range, leftmost consecutive common elements are always fixed 
+class Solution {
+public:
+    int rangeBitwiseAnd(int left, int right) {
+        int shiftCounter = 0;
+        while (left != right) {
+            left >>= 1;
+            right >>= 1;
+            shiftCounter++;
+        }
+
+        return left << shiftCounter;
+    }
+};
+// TC : O(1)    // Max processing 32 bits
 // SC : O(1)
