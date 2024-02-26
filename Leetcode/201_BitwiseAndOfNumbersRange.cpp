@@ -54,6 +54,28 @@ public:
 // TC : O(1)
 // SC : O(1)
 
+// Approach-II can be written like below also 
+class Solution {
+public:
+    int rangeBitwiseAnd(int left, int right) {
+        int ans = 0;
+        
+        for(int i=0; i<31; i++) {
+            int currNo = pow(2,i);
+            if(right-left <= currNo) {
+                if(left/currNo == right/currNo) {    // Belongs to Same Group
+                    if(left/currNo % 2 != 0) {    // Accessing Even Group
+                        int to_add = 1 << i;
+                        ans += to_add;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+};
+
 
 // ================================================================== Approach-III (Optimal) ==================================================================
 // KEY POINTS TO TAKEAWAY:
