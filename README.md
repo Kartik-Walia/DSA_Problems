@@ -6,9 +6,9 @@ This repository contains daily solutions to Data Structures and Algorithms (DSA)
 
 ## Repository Structure
 
-- **CodeStudio**: Solutions to DSA problems from CodeStudio.
-- **GeeksforGeeks**: Solutions to DSA problems from GeeksforGeeks.
-- **InterviewBit**: Solutions to DSA problems from InterviewBit.
+- **CodeStudio**: Solutions to DSA problems from CodeStudio, organized by question name.
+- **GeeksforGeeks**: Solutions to DSA problems from GeeksforGeeks, organized by question name.
+- **InterviewBit**: Solutions to DSA problems from InterviewBit, organized by question name.
 - **LeetCode**: Solutions to LeetCode problems, organized by question name and number.
 
 ## Navigation
