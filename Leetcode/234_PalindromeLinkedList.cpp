@@ -45,7 +45,7 @@ public:
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        // Edge case: LL has 1 or 2 elements
+        // Edge case: LL has 0 or 1 element
         if(!head || !head->next) return true;
 
         // Find middle element of linked list
