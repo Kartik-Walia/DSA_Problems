@@ -42,6 +42,41 @@ public:
 
 
 // =============================================== Approach-II (Optimal Approach) ===============================================
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        // Edge case: LL has 1 or 2 elements
+        if(!head || !head->next) return true;
 
-// TC : 
-// SC : 
+        // Find middle element of linked list
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        // Reverse 2nd half of linked list
+        ListNode* prev = NULL;
+        ListNode* curr = slow->next;
+        while(curr) {
+            ListNode* nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+
+        // Compare 1st and 2nd half of LL
+        ListNode* temp = head;
+        ListNode* temp2 = prev;
+        while(temp && temp2) {
+            if(temp->val != temp2->val) return false;
+            temp = temp->next;
+            temp2 = temp2->next;
+        }
+        
+        return true;
+    }
+};
+// TC : O(N) + O(N) + O(N)
+// SC : O(1)
