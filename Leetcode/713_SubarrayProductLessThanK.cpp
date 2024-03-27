@@ -19,7 +19,10 @@ public:
                 i++;
             }
 
+            // If product is less than k, calculate the number of subarrays
             count += j-i+1;     // j-i for expanded size & 1 for single subarray nums[j]
+
+            // Expand the window
             j++;
         }
 
