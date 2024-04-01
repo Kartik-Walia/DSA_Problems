@@ -1,36 +1,18 @@
-class A:
-   def __init__(self, c):
-       print("---------Inside class A----------")
-       self.c = c
-   print("Print inside A.")
+num = 9
+class Car:
+    num = 5
+    bathrooms = 2
 
-   def alpha(self):
-       c = self.c + 1
-       return c
+def cost_evaluation(num):
+    num = 10
+    return num
 
-print(dir(A))
-print("Instantiating A..")
-a = A(1)
-print(a.alpha())
+class Bike():
+    num = 11
 
-class B:
-   def __init__(self, a):
-       print("---------Inside class B----------")
-       self.a = a
-
-   print(a.alpha())
-   d = 5
-   print(d)
-   print(a)
-
-print("Instantiating B..")
-b = B(a)
-print(a)
-
-# value = 7
-# class A:
-#     value = 5
-
-# a = A()
-# a.value = 3
-# print(value)
+cost_evaluation(num)
+car = Car()
+bike = Bike()
+car.num = 7
+Car.num = 2
+print(num)
